@@ -26,14 +26,8 @@
 Cypress.Commands.add('getIFrameBody', () => {
   return cy.get('iframe').its('0.contentDocument.body').should('not.be.empty').then(cy.wrap);
 });
-
-Cypress.Commands.add('openBombayDesktopWithGeneratedNickname', () => {
+Cypress.Commands.add('openBombayDesktopLobby', () => {
   cy.visit('https://demo.bombay.live/operator/bombaydemo/bombay-live-lobby/fun')
   cy.getIFrameBody().as('iframe')
-  cy.get('@iframe').find('[data-test-id="generate-username-button"]').should('be.visible')
-  cy.get('#iframeId').its('0.contentDocument.body').then(cy.wrap).find('[data-test-id="username-popup"]').within(() => {
-    cy.get('[data-test-id="generate-username-button"]').should('be.visible').click()
-    cy.get('[data-test-id="save-username-button"]').should('be.visible').click()
-  })
-
+  cy.get('@iframe').find('[data-test-id="username-popup"]').should('be.visible')
 })

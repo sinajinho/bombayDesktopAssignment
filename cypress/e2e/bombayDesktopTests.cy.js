@@ -12,15 +12,17 @@ const rulesModal = new bombayRulesModal
 
 describe('Bombay Desktop Automation Tests', () => {
   beforeEach(() => {
-    cy.openBombayDesktopWithGeneratedNickname()
+    cy.openBombayDesktopLobby()
   })
-  xit('User can change nickname from settings', () => {
+  it('User can change nickname from settings', () => {
+    homePage.generateRandomNickname()
     homePage.openSettingsModal()
     settingsModal.changeUserNickname(bombayUserData.newNickname)
     homePage.openSettingsModal()
     settingsModal.checkUserChangedNickname(bombayUserData.newNickname)
   })
-  xit('User can join with featured game table and read the game rules', () => {
+  it('User can join with featured game table and read the game rules', () => {
+    homePage.generateRandomNickname()
     homePage.joinFeaturedGameTable(bombayUserData.userBalance, bombayUserData.userTotalBet)
     gameTable.openGameRules()
     rulesModal.verifyRulesCorrectness()
